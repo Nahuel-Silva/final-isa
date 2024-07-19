@@ -1,0 +1,13 @@
+{
+  "generator-jhipster": {
+    "baseName": "jhipster",
+    "devServerPort": 4200,
+    "entities": ["Category", "Product", "Customer", "Address"],
+    "jhipsterVersion": "8.6.0",
+    "jwtSecretKey": "NGQyZmJiZDY4OGQyZjczOWVmZWRkOWY2OTc5NjQ5NjFiM2NmN2M2OGExYjBhZGEwMmZmYTc1NjI5M2E2YTliMGE2MzNiZDhiZDU5OWVmMjZiZDA3OGM1NGI1ZDM2NTk0OWI1YTRiOWU1OThiMjFhZWYzODUwMDkyZDZhMzYxZmE=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1721430926000,
+    "nativeLanguage": "en",
+    "prodDatabaseType": "postgresql"
+  }
+}
