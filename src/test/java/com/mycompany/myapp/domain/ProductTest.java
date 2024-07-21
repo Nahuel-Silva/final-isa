@@ -3,13 +3,39 @@ package com.mycompany.myapp.domain;
 import static com.mycompany.myapp.domain.CategoryTestSamples.*;
 import static com.mycompany.myapp.domain.ProductTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.mycompany.myapp.web.rest.TestUtil;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ProductTest {
+
+    private Product product;
+
+    @BeforeEach
+    public void init() {
+        product = new Product();
+        product.setTitle("producto ejemplo");
+        product.setKeywords("ejemplo,producto");
+        product.setDescription("esta es la descripcion del producto ejemplo");
+        product.setRating(5);
+        product.setDateAdded(LocalDate.now());
+        product.setDateModified(LocalDate.now());
+    }
+
+    @Test
+    public void testProductAttributes() {
+        assertEquals("producto ejemplo", product.getTitle());
+        assertEquals("ejemplo,producto", product.getKeywords());
+        assertEquals("esta es la descripcion del producto ejemplo", product.getDescription());
+        assertEquals(5, product.getRating());
+        assertEquals(LocalDate.now(), product.getDateAdded());
+        assertEquals(LocalDate.now(), product.getDateModified());
+    }
 
     @Test
     void equalsVerifier() throws Exception {
