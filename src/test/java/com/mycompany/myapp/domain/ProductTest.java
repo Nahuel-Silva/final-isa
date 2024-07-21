@@ -1,7 +1,9 @@
 package com.mycompany.myapp.domain;
 
-import static com.mycompany.myapp.domain.CategoryTestSamples.*;
-import static com.mycompany.myapp.domain.ProductTestSamples.*;
+import static com.mycompany.myapp.domain.CategoryTestSamples.getCategoryRandomSampleGenerator;
+import static com.mycompany.myapp.domain.ProductTestSamples.getProductRandomSampleGenerator;
+import static com.mycompany.myapp.domain.ProductTestSamples.getProductSample1;
+import static com.mycompany.myapp.domain.ProductTestSamples.getProductSample2;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,6 +18,7 @@ class ProductTest {
 
     private Product product;
 
+    //Test de unidad
     @BeforeEach
     public void init() {
         product = new Product();
@@ -27,6 +30,7 @@ class ProductTest {
         product.setDateModified(LocalDate.now());
     }
 
+    //Verifica que los atributos del objeto Product se establecieron correctamente.
     @Test
     public void testProductAttributes() {
         assertEquals("producto ejemplo", product.getTitle());

@@ -15,6 +15,7 @@ class CustomerTest {
 
     private Customer customer;
 
+    //Test de unidad
     @BeforeEach
     public void init() {
         customer = new Customer();
@@ -24,6 +25,7 @@ class CustomerTest {
         customer.setTelephone("5555555");
     }
 
+    //Verifica que los atributos del objeto Customer se establecieron correctamente.
     @Test
     public void testCustomerAttributes() {
         assertEquals("Pedro", customer.getFirstName());
