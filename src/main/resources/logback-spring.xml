@@ -13,6 +13,14 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 
+    <!-- Logstash appender configuration -->
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>logstash:5044</destination>
+        <encoder>
+            <pattern>{"@timestamp":"%date","@version":1,"message":"%message","logger":"%logger","level":"%level","thread":"%thread"}</pattern>
+        </encoder>
+    </appender>
+
     <!-- The FILE and ASYNC appenders are here as examples for a production configuration -->
     <!--
     <include resource="org/springframework/boot/logging/logback/file-appender.xml" />

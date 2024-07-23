@@ -1,0 +1,74 @@
+version: '3.7'
+services:
+  jhipster:
+    image: jhipster:latest
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://jhipster-postgresql:5432/jhipster
+      - SPRING_DATASOURCE_USERNAME=jhipster
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://jhipster-postgresql:5432/jhipster
+      - SPRING_LIQUIBASE_USERNAME=jhipster
+      - SPRING_LIQUIBASE_PASSWORD=admin
+      - JHIPSTER_SLEEP=30
+      - LOGSTASH_HOST=logstash
+    ports:
+      - '8080:8080'
+    healthcheck:
+      test: ['CMD-SHELL', 'curl -f http://localhost:8080/actuator/health || exit 1']
+      interval: 5s
+      timeout: 5s
+      retries: 40
+    depends_on:
+      - jhipster-postgresql
+      - logstash
+  jhipster-postgresql:
+    image: postgres:16.3
+    environment:
+      - POSTGRES_USER=jhipster
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U $${POSTGRES_USER}
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Elasticsearch service
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+    ports:
+      - '9200:9200'
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+  # Logstash service
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.12.1
+    container_name: logstash
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+    ports:
+      - '5044:5044'
+    depends_on:
+      - elasticsearch
+
+  # Kibana service
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.12.1
+    container_name: kibana
+    ports:
+      - '5601:5601'
+    depends_on:
+      - elasticsearch
+
+volumes:
+  esdata:
+    driver: local
