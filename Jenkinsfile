@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-login')
-        DOCKERHUB_REPO = 'nahuel_11_arg@hotmail.com/jhipsterproject'
+        DOCKERHUB_REPO = 'nahuel11/jhipsterproject'
     }
 
     stages {
