@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-login')
-        DOCKERHUB_REPO = 'nahuel11/jhipsterproject'
+        DOCKERHUB_CREDENTIALS = 'dockerhub-login'
+        DOCKERHUB_REPO = 'nahuel11/jhipsterproject:latest'
     }
 
     stages {
@@ -32,9 +32,12 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
-                        dockerrImage.push('latest')
+                    // Log in to Docker Hub
+                    withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                        sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
                     }
+                    // Push the image
+                    sh 'docker push nahuel11/jhipsterproject:latest'
                 }
             }
         }
