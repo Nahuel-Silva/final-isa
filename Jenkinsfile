@@ -25,7 +25,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def customImage = docker.build("$DOCKERHUB_REPO")
+                    def dockerrImage = docker.build("$DOCKERHUB_REPO")
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
-                        customImage.push('latest')
+                        dockerrImage.push('latest')
                     }
                 }
             }
