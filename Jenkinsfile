@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('9f47ce4d-d8a3-442c-ae7e-3925d6850964')
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-login')
         DOCKERHUB_REPO = 'nahuel11/jhipsterProject'
     }
 
@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout SCM') {
             steps {
                 script {
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/Nahuel-Silva/final-isa.git', credentialsId: '9f47ce4d-d8a3-442c-ae7e-3925d6850964']]])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/Nahuel-Silva/final-isa.git', credentialsId: 'dockerhub-login']]])
                 }
             }
         }
