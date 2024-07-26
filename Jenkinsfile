@@ -14,6 +14,14 @@ pipeline {
                 }
             }
         }
+        stage('Build Application') {
+            steps {
+                script {
+                    // Comando para construir la aplicación
+                    sh './mvnw clean package -DskipTests'
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
