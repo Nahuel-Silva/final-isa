@@ -18,6 +18,11 @@ logging:
     ROOT: INFO
     tech.jhipster: INFO
     com.mycompany.myapp: INFO
+  logstash:
+    enabled: true
+    host: logstash
+    port: 5000
+    queue-size: 512
 
 management:
   prometheus:
