@@ -292,6 +292,11 @@
             <artifactId>testcontainers</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>7.0</version> <!-- Ajusta la versión según sea necesario -->
+        </dependency>
     </dependencies>
 
     <build>
@@ -641,7 +646,7 @@
                             <exclude>**/*IntTest*</exclude>
                         </excludes>
                         <systemPropertyVariables>
-                            <java.util.logging.config.file>src/test/resources/logback.xml</java.util.logging.config.file>
+                            <java.util.logging.config.file>src/test/resources/logback-spring.xml</java.util.logging.config.file>
                         </systemPropertyVariables>
                     </configuration>
                 </plugin>
