@@ -37,7 +37,7 @@ pipeline {
                         sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
                     }
                     // Push the image
-                    sh 'docker push nahuel11/jhipsterproject:latest'
+                    sh 'sudo docker push nahuel11/jhipsterproject:latest'
                 }
             }
         }
